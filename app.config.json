@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "USA",
+        "Store": "usa",
+        "CountryCode": "us",
+        "CultureCode": "en-US",
+        "CurrencyCode": "USD",
+        "Label": "US"
+    },
+    {
+        "Name": "Germany",
+        "Store": "ger",
+        "CountryCode": "de",
+        "CultureCode": "de-DE",
+        "CurrencyCode": "EUR",
+        "Label": "DE"
+    }
+]

@@ -1,0 +1,26 @@
+{
+    "metaTags": {
+        "title": "Integer bibendum",
+        "description": "Phasellus porta, ante sit amet accumsan tristique"
+    },
+    "products": [
+        {
+            "name": "Vivamus magna",
+            "image": "https://<...>.jpg",
+            "isInStock": true,
+            "price": {
+                "amount": 1500,
+                "currency": "USD"
+            }
+        },
+        {
+            "name": "Sed vitae",
+            "image": "https://<...>.jpg",
+            "isInStock": false,
+            "price": {
+                "amount": 4200,
+                "currency": "USD"
+            }
+        }
+    ]
+}

@@ -1,4 +1,13 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
+    // optimization: {
+    //     minimize: false
+    // },
+    reactStrictMode: true,
+    i18n: {
+        localeDetection: false,
+        locales: ['default', 'en-US', 'de-DE'],
+        defaultLocale: 'default',
+    },
+    trailingSlash: true,
 }
