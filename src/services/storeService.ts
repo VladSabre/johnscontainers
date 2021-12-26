@@ -7,15 +7,15 @@ export class StoreService {
     public getLocalizaion(locale: string): Map<string, string> {
         if (locale == 'en-US')
             return new Map<string, string>([
-                ["label_add-to-cart", "Add to cart"],
-                ["label_in-stock", "In stock"],
-                ["label_out-of-stock", "Out of stock"],
+                ['label_add-to-cart', 'Add to cart'],
+                ['label_in-stock', 'In stock'],
+                ['label_out-of-stock', 'Out of stock'],
             ]);
         else if (locale == 'de-DE')
             return new Map<string, string>([
-                ["label_add-to-cart", "in den Warenkorb"],
-                ["label_in-stock", "Vorrätig"],
-                ["label_out-of-stock", "Ausverkauft"],
+                ['label_add-to-cart', 'in den Warenkorb'],
+                ['label_in-stock', 'Vorrätig'],
+                ['label_out-of-stock', 'Ausverkauft'],
             ]);
         else
             throw Error('Unexpected locale');
@@ -24,14 +24,14 @@ export class StoreService {
     public getProducts(): ProductResponse {
         return {
             metaTags: {
-                title: "Integer bibendum",
-                description: "Phasellus porta, ante sit amet accumsan tristique"
+                title: 'Integer bibendum',
+                description: 'Phasellus porta, ante sit amet accumsan tristique'
             },
             products: [
                 {
                     id: 1,
-                    name: "Vivamus magna",
-                    image: "/container1.jpg",
+                    name: 'Vivamus magna',
+                    image: '/container1.jpg',
                     isInStock: true,
                     price: [
                         {
@@ -48,8 +48,8 @@ export class StoreService {
                 },
                 {
                     id: 2,
-                    name: "Sed vitae",
-                    image: "/container2.jpg",
+                    name: 'Sed vitae',
+                    image: '/container2.jpg',
                     isInStock: false,
                     price: [
                         {

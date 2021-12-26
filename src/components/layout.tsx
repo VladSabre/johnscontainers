@@ -10,14 +10,14 @@ import { ConfigHelper } from '../services/configHelper';
 export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
     const context = useAppContext();
     const router = useRouter();
-    const configService = new ConfigHelper();
+    const configHelper = new ConfigHelper();
 
-    const defaultLabel = configService.getRegion(configService.getDefaultLocale()).Label;
+    const defaultLabel = configHelper.getRegion(configHelper.getDefaultLocale()).Label;
     const [languageLabel, setLanguageLabel] = useState(defaultLabel);
 
     const ChangeRegion = (): void => {
         context.removeFromCart();
-        const nextRegion = configService.getNextRegion(languageLabel);
+        const nextRegion = configHelper.getNextRegion(languageLabel);
         setLanguageLabel(nextRegion.Label);
         router.push(router.pathname, router.asPath, { locale: nextRegion.CultureCode })
     }
@@ -35,11 +35,11 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
             <Navbar bg="dark" variant="dark" expand="sm" fixed='top'>
                 <Container >
                     <Navbar.Brand href="#" onClick={GoToHome} className='me-auto'>John&apos;s containers</Navbar.Brand>
-                    <Button variant="info" title="my-cart" onClick={GoToCart} className='me-1'>
+                    <Button variant="info" title="cart" onClick={GoToCart} className='me-1'>
                         <FontAwesomeIcon icon={faShoppingCart} />
                         <Badge bg="danger">{context.cart.items.length}</Badge>
                     </Button>
-                    <Button onClick={ChangeRegion}>{languageLabel}</Button>
+                    <Button title="region" onClick={ChangeRegion}>{languageLabel}</Button>
                 </Container>
             </Navbar>
             <div className={styles.content}>
