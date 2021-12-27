@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Card, Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useAppContext } from "../context/appContext";
 import { ProductInCart } from "../models/productInCart";
 import PriceComponent from "./priceComponent";
@@ -8,12 +8,12 @@ const SelectedProduct = (props: ProductInCart) => {
     const context = useAppContext();
 
     const renderRemoveButton = (): JSX.Element => {
-        const handler = () => { context.removeFromCart(props.id) };
+        const handler = () => { context.removeFromCart(props.id); };
 
         return (
             <Button variant='primary' onClick={handler}>Remove</Button>
         );
-    }
+    };
 
     return (
         <Card className='p-3'>
@@ -33,6 +33,6 @@ const SelectedProduct = (props: ProductInCart) => {
             </Row>
         </Card>
     );
-}
+};
 
 export default SelectedProduct;

@@ -1,14 +1,14 @@
-import React from 'react'
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Head from 'next/head'
-import { ProductCardModel } from '../models/productCardModel'
-import ProductCard from '../components/productCard'
-import { StoreService } from '../services/storeService'
-import { ProductResponse } from '../models/productResponse'
-import styles from '../../styles/Product.module.scss';
-import { ConfigHelper } from '../services/configHelper'
-import { useRouter } from 'next/router'
-import { Page } from '../models/page'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import Head from 'next/head';
+import React from 'react';
+import { ConfigHelper } from '../services/configHelper';
+import { useRouter } from 'next/router';
+import { Page } from '../models/page';
+import ProductCard from '../components/productCard';
+import { ProductCardModel } from '../models/productCardModel';
+import { ProductResponse } from '../models/productResponse';
+import { StoreService } from '../services/storeService';
+import styles from '../../styles/product.module.scss';
 
 export const getServerSideProps: GetServerSideProps<ProductResponse> = async (_context) => {
     const service = new StoreService();
@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<ProductResponse> = async (_c
     return {
         props: service.getProducts()
     };
-}
+};
 
 const Shop = (data: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const service = new StoreService();
@@ -42,7 +42,7 @@ const Shop = (data: InferGetServerSidePropsType<typeof getServerSideProps>) => {
                 )}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Shop
+export default Shop;

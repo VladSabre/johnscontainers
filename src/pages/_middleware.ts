@@ -1,14 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
-const PUBLIC_FILE = /\.(.*)$/
+const PUBLIC_FILE = /\.([a-zA-Z0-9]+$)/;
 
 export function middleware(request: NextRequest) {
+    const { pathname, search, locale } = request.nextUrl;
+
     const shouldHandleLocale =
-        !PUBLIC_FILE.test(request.nextUrl.pathname) &&
-        !request.nextUrl.pathname.includes('/api/') &&
-        request.nextUrl.locale === 'default'
+        !PUBLIC_FILE.test(pathname) &&
+        !pathname.includes('/api/') &&
+        locale === 'default';
 
     return shouldHandleLocale
-        ? NextResponse.redirect(`/en-US${request.nextUrl.href}`)
-        : undefined
+        ? NextResponse.redirect(`/en-US${pathname}${search}`)
+        : undefined;
 }

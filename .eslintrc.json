@@ -1,9 +1,11 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
     },
     "extends": [
+        "next",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
@@ -17,8 +19,25 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "autofix"
     ],
     "rules": {
+        "semi": "error",
+        "sort-imports": [
+            "warn",
+            {
+                "ignoreCase": false,
+                "ignoreDeclarationSort": false,
+                "ignoreMemberSort": false,
+                "memberSyntaxSortOrder": [
+                    "none",
+                    "all",
+                    "multiple",
+                    "single"
+                ],
+                "allowSeparatedGroups": false
+            }
+        ]
     }
 }

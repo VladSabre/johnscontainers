@@ -1,4 +1,4 @@
-export interface DynamicPageContet {
+export interface DynamicPageContent {
     title?: string;
     description: string;
 }

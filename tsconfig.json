@@ -11,10 +11,6 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noUnusedLocals": true,
-        // "noUnusedParameters": true,
-        // "noImplicitReturns": true,
-        // "noFallthroughCasesInSwitch": true,
-        // "strictPropertyInitialization": true,
         "noEmit": true,
         "esModuleInterop": true,
         "module": "esnext",
@@ -24,21 +20,6 @@
         "jsx": "preserve",
         "incremental": true,
     },
-    "sort-imports": [
-        "error",
-        {
-            "ignoreCase": false,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": [
-                "none",
-                "all",
-                "multiple",
-                "single"
-            ],
-            "allowSeparatedGroups": false
-        }
-    ],
     "include": [
         "next-env.d.ts",
         "**/*.ts",

@@ -1,5 +1,5 @@
-import { AppStore } from './appStore';
 import { createContext, useContext } from 'react';
+import { AppStore } from './appStore';
 
 export const AppContext = createContext<AppStore>({} as AppStore);
 

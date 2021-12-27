@@ -1,5 +1,5 @@
 import { Currency } from '../models/currency';
-import { DynamicPageContet } from '../models/DynamicPageContet';
+import { DynamicPageContent } from '../models/dynamicPageContent';
 import { HomePageInfo } from '../models/homePageInfo';
 import { Page } from '../models/page';
 import { ProductResponse } from '../models/productResponse';
@@ -129,7 +129,7 @@ export class StoreService {
             throw Error('Unexpected region');
     }
 
-    public getDynamicPageContent(page: Page, region: string): DynamicPageContet {
+    public getDynamicPageContent(page: Page, region: string): DynamicPageContent {
         if (page === Page.Home)
             return this.getHomePageContent(region);
         else if (page === Page.Shop)
@@ -138,7 +138,7 @@ export class StoreService {
             throw Error('Unexpected page');
     }
 
-    private getHomePageContent(region: string): DynamicPageContet {
+    private getHomePageContent(region: string): DynamicPageContent {
         if (region === 'en-US')
             return {
                 title: 'Hello',
@@ -153,7 +153,7 @@ export class StoreService {
             throw Error('Unexpected region');
     }
 
-    private getShopPageContent(region: string): DynamicPageContet {
+    private getShopPageContent(region: string): DynamicPageContent {
         if (region === 'en-US')
             return {
                 description: 'Phasellus porta, ante sit amet'

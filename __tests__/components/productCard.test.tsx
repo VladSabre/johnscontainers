@@ -1,12 +1,15 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import ProductCard from '../../src/components/productCard';
 import * as Context from '../../src/context/appContext';
+import * as nextRouter from 'next/router';
 import { AppStore } from '../../src/context/appStore';
 import { Currency } from '../../src/models/currency';
 import { Price } from '../../src/models/price';
-import * as LocalizedPrice from '../../src/services/useLocalizedPrice';
+import * as LocalizedPrice from '../../src/services/getLocalizedPrice';
 import * as Localization from '../../src/services/useLocalization';
 import { ProductCardModel } from '../../src/models/productCardModel';
+import { NextRouter } from 'next/router';
 
 describe('Product card component tests', () => {
     let useRouter: jest.SpyInstance;
@@ -15,10 +18,12 @@ describe('Product card component tests', () => {
     let addToCart: jest.Mock;
 
     beforeEach(() => {
-        useRouter = jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ locale: 'en-US' });
+        useRouter = jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
+            locale: 'en-US',
+        } as NextRouter);
         useLocalizedPrice = jest.spyOn(LocalizedPrice, 'default');
         useLocalization = jest.spyOn(Localization, 'default');
-        addToCart = jest.fn((_product: ProductCardModel) => { });
+        addToCart = jest.fn((_product: ProductCardModel) => undefined);
 
         const localization = new Map<string, string>([
             ['label_add-to-cart', 'Add to cart'],
@@ -49,7 +54,7 @@ describe('Product card component tests', () => {
     });
 
     afterEach(() => {
-        useRouter.mockReset()
+        useRouter.mockReset();
         useLocalizedPrice.mockReset();
         useLocalization.mockReset();
     });

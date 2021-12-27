@@ -13,23 +13,22 @@ const Redirect = (data: InferGetStaticPropsType<typeof getStaticProps>) => {
     useEffect(() => {
         if (slug === data.path)
             router.push('/shop');
-    }, [slug, data])
+    }, [slug, data]);
 
     return null;
-}
+};
 
 export const getStaticProps: GetStaticProps<RedirectSource> = async (_context) => {
     return {
         props: { path: 'product' }
-    }
-}
+    };
+};
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-
     return {
         paths: [],
         fallback: 'blocking'
-    }
-}
+    };
+};
 
-export default Redirect
+export default Redirect;

@@ -1,10 +1,13 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Layout } from '../../src/components/layout';
 import * as Context from '../../src/context/appContext';
+import * as nextRouter from 'next/router';
 import { AppStore } from '../../src/context/appStore';
 import { ConfigCulture } from '../../src/models/configCulture';
 import { ProductCardModel } from '../../src/models/productCardModel';
 import { ConfigHelper } from '../../src/services/configHelper';
+import { NextRouter } from 'next/router';
 
 describe('Layout component tests', () => {
     let useRouter: jest.SpyInstance;
@@ -13,10 +16,12 @@ describe('Layout component tests', () => {
     let removeFromCart: jest.Mock<void, [id?: number | undefined]>;
 
     beforeEach(() => {
-        useRouter = jest.spyOn(require('next/router'), 'useRouter');
+        useRouter = jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
+            locale: 'en-US',
+        } as NextRouter);
         useContext = jest.spyOn(Context, 'useAppContext');
-        addToCart = jest.fn((_product: ProductCardModel) => { });
-        removeFromCart = jest.fn((_id?: number) => { });
+        addToCart = jest.fn((_product: ProductCardModel) => undefined);
+        removeFromCart = jest.fn((_id?: number) => undefined);
     });
 
     afterEach(() => {
@@ -43,7 +48,7 @@ describe('Layout component tests', () => {
         mockContext();
 
         // Act
-        render(<Layout><div>testtest</div></Layout>)
+        render(<Layout><div>testtest</div></Layout>);
 
         // Assert
         expect(screen.queryByText('John\'s containers')).toBeInTheDocument();
@@ -54,11 +59,11 @@ describe('Layout component tests', () => {
         // Arrange
         mockContext();
 
-        const push = jest.fn((_path: string) => { });
+        const push = jest.fn((_path: string) => undefined);
 
         useRouter.mockImplementationOnce(() => ({
             push: push
-        }))
+        }));
 
         // Act
         render(<Layout><div>testtest</div></Layout>);
@@ -73,11 +78,11 @@ describe('Layout component tests', () => {
         // Arrange
         mockContext();
 
-        const push = jest.fn((_path: string) => { });
+        const push = jest.fn((_path: string) => undefined);
 
         useRouter.mockImplementationOnce(() => ({
             push: push
-        }))
+        }));
 
         // Act
         render(<Layout><div>testtest</div></Layout>);
@@ -102,12 +107,12 @@ describe('Layout component tests', () => {
             CultureCode: 'en-US',
             CurrencyCode: 'USD',
             Label: 'US'
-        }
+        };
 
         const languageLabel = 'US';
-        const setLanguageLabel = jest.fn((_state: React.SetStateAction<string>) => { });
+        const setLanguageLabel = jest.fn((_state: unknown) => undefined);
 
-        const push = jest.fn((_path: string, _asPath: string, _options: { locale: string }) => { });
+        const push = jest.fn((_path: string, _asPath: string, _options: { locale: string }) => undefined);
 
         jest.spyOn(ConfigHelper.prototype, 'getDefaultLocale').mockReturnValue(culture.CultureCode);
         const getNextRegion = jest.spyOn(ConfigHelper.prototype, 'getNextRegion').mockReturnValue(culture);
@@ -117,9 +122,9 @@ describe('Layout component tests', () => {
             push: push,
             pathname: pathname,
             asPath: asPath,
-        }))
+        }));
 
-        jest.spyOn(require('react'), 'useState').mockReturnValue([languageLabel, setLanguageLabel]);
+        jest.spyOn(React, 'useState').mockReturnValue([languageLabel, setLanguageLabel]);
 
         // Act
         render(<Layout><div>testtest</div></Layout>);
@@ -135,4 +140,4 @@ describe('Layout component tests', () => {
         expect(push.mock.calls[0][0]).toBe(pathname);
         expect(push.mock.calls[0][1]).toBe(asPath);
     });
-})
+});

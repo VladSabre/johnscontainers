@@ -1,6 +1,6 @@
-import useSWR, { Fetcher } from "swr"
+import useSWR, { Fetcher } from "swr";
+import { ConfigHelper } from "./configHelper";
 import { RegionalSettings } from "../models/regionalSettings";
-import { ConfigHelper } from "./configHelper"
 import { StoreService } from "./storeService";
 
 export default function useRegionalSettings(region: string | undefined): RegionalSettings {
@@ -12,7 +12,7 @@ export default function useRegionalSettings(region: string | undefined): Regiona
 
     const mockFetcher: Fetcher<RegionalSettings, string[]> = (url: string, region: string) => (new StoreService).getRegionalSettings(region);
 
-    const { data } = useSWR(['/api/regionalSettings', region], mockFetcher)
+    const { data } = useSWR(['/api/regionalSettings', region], mockFetcher);
 
     return data ? data : <RegionalSettings>{ paymentMethods: ['loading'] };
 }

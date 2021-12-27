@@ -19,16 +19,16 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
         context.removeFromCart();
         const nextRegion = configHelper.getNextRegion(languageLabel);
         setLanguageLabel(nextRegion.Label);
-        router.push(router.pathname, router.asPath, { locale: nextRegion.CultureCode })
-    }
+        router.push(router.pathname, router.asPath, { locale: nextRegion.CultureCode });
+    };
 
     const GoToCart = (): void => {
         router.push('/cart');
-    }
+    };
 
     const GoToHome = (): void => {
         router.push('/');
-    }
+    };
 
     return (
         <>
@@ -48,6 +48,6 @@ export const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
                 </Container>
             </div>
         </>
-    )
+    );
 };
 

@@ -1,22 +1,27 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import SelectedProduct from '../../src/components/selectedProduct';
 import * as Context from '../../src/context/appContext';
+import * as nextRouter from 'next/router';
 import { AppStore } from '../../src/context/appStore';
 import { Currency } from '../../src/models/currency';
 import { Price } from '../../src/models/price';
-import * as LocalizedPrice from '../../src/services/useLocalizedPrice';
+import * as LocalizedPrice from '../../src/services/getLocalizedPrice';
+import { NextRouter } from 'next/router';
 
 describe('Selected product component tests', () => {
     let useRouter: jest.SpyInstance;
     let useLocalizedPrice: jest.SpyInstance;
 
     beforeEach(() => {
-        useRouter = jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ locale: 'en-US' });
+        useRouter = jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
+            locale: 'en-US',
+        } as NextRouter);
         useLocalizedPrice = jest.spyOn(LocalizedPrice, 'default');
     });
 
     afterEach(() => {
-        useRouter.mockReset()
+        useRouter.mockReset();
         useLocalizedPrice.mockReset();
     });
 
@@ -32,7 +37,7 @@ describe('Selected product component tests', () => {
         const amount = 4;
 
         const useContext = jest.spyOn(Context, 'useAppContext');
-        const removeFromCart = jest.fn((_id?: number) => { });
+        const removeFromCart = jest.fn((_id?: number) => undefined);
 
         const store: AppStore = {
             cart: {

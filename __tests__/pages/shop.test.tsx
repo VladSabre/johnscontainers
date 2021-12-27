@@ -1,19 +1,24 @@
-import { render, screen } from '@testing-library/react'
-import Shop from '../../src/pages/shop'
+import { render, screen } from '@testing-library/react';
+import * as nextRouter from 'next/router';
+import React from 'react';
+import Shop from '../../src/pages/shop';
 import { StoreService } from '../../src/services/storeService';
 import { ProductCardModel } from '../../src/models/productCardModel';
 import { Currency } from '../../src/models/currency';
-import { DynamicPageContet } from '../../src/models/DynamicPageContet';
+import { DynamicPageContent } from '../../src/models/dynamicPageContent';
+import { NextRouter } from 'next/router';
 
 describe('Shop page tests', () => {
     let useRouter: jest.SpyInstance;
     let getDynamicPageContent: jest.SpyInstance;
 
     beforeEach(() => {
-        useRouter = jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ locale: 'en-US' });
+        useRouter = jest.spyOn(nextRouter, 'useRouter').mockReturnValue({
+            locale: 'en-US',
+        } as NextRouter);
         getDynamicPageContent = jest.spyOn(StoreService.prototype, 'getDynamicPageContent');
 
-        const meta: DynamicPageContet = {
+        const meta: DynamicPageContent = {
             description: 'description'
         };
 
@@ -28,7 +33,7 @@ describe('Shop page tests', () => {
     it('renders a greeting', () => {
         const metaTags = {
             title: 'title'
-        }
+        };
 
         const products: ProductCardModel[] = [
             {
@@ -54,9 +59,9 @@ describe('Shop page tests', () => {
                 }]
             }
         ];
-        render(<Shop metaTags={metaTags} products={products} />)
+        render(<Shop metaTags={metaTags} products={products} />);
 
         expect(screen.queryByText('Lol1')).toBeInTheDocument();
         expect(screen.queryByText('LolLol2')).toBeInTheDocument();
-    })
-})
+    });
+});

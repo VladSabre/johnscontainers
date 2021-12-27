@@ -1,20 +1,24 @@
-import React from 'react'
-import SelectedProduct from '../components/selectedProduct'
-import useRegionalSettings from '../services/useRegionalSettings'
-import { useAppContext } from '../context/appContext'
-import { ProductInCart } from '../models/productInCart'
-import { useRouter } from 'next/router'
-import { ConfigHelper } from '../services/configHelper'
+import React from 'react';
+import SelectedProduct from '../components/selectedProduct';
+import useRegionalSettings from '../services/useRegionalSettings';
+import { ConfigHelper } from '../services/configHelper';
+import { NextPage } from 'next';
+import { ProductInCart } from '../models/productInCart';
+import { useAppContext } from '../context/appContext';
+import { useRouter } from 'next/router';
+import styles from '../../styles/product.module.scss';
 
-const Cart = () => {
+const Cart: NextPage = () => {
     const context = useAppContext();
     const configHelper = new ConfigHelper();
     const locale = useRouter().locale || configHelper.getDefaultLocale();
     const regionalSettings = useRegionalSettings(configHelper.getRegion(locale).CountryCode);
 
+    console.log(typeof window === 'undefined' ? 'server' : 'client');
+
     return (
         <>
-            <div className='container'>
+            <div className={styles['cart-item']}>
                 {context.cart.items.map((product: ProductInCart) =>
                     <SelectedProduct
                         key={product.id}
@@ -30,7 +34,11 @@ const Cart = () => {
                 </ul>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Cart
+Cart.getInitialProps = async (_context) => {
+    return {};
+};
+
+export default Cart;

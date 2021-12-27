@@ -1,14 +1,14 @@
 import React from 'react';
-import Image from 'next/image'
-import PriceComponent from './priceComponent';
-import useLocalization from '../services/useLocalization';
-import { ProductCardModel } from '../models/productCardModel';
-import { useAppContext } from '../context/appContext';
+import Image from 'next/image';
 import { Badge, Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { useAppContext } from '../context/appContext';
+import { ProductCardModel } from '../models/productCardModel';
+import useLocalization from '../services/useLocalization';
 import styles from '../../styles/productCard.module.scss';
+import PriceComponent from './priceComponent';
 
 const ProductCard = (props: ProductCardModel) => {
     const context = useAppContext();
@@ -24,15 +24,15 @@ const ProductCard = (props: ProductCardModel) => {
                 <span className={styles['stock-text']}>{text}</span>
             </>
         );
-    }
+    };
 
     const renderAddToCartButton = (): JSX.Element => {
-        const handler = () => { context.addToCart(props) };
+        const handler = () => { context.addToCart(props); };
 
         return (
             <Button variant='primary' disabled={!props.isInStock} onClick={handler}>{localization.get('label_add-to-cart')}</Button>
         );
-    }
+    };
 
     return (
         <Card className={`${styles['product-card']} shadow m-3`}>
@@ -44,7 +44,7 @@ const ProductCard = (props: ProductCardModel) => {
                 {renderAddToCartButton()}
             </Card.Body>
         </Card>
-    )
+    );
 };
 
 export default ProductCard;

@@ -1,5 +1,5 @@
-import configData from '../../app.config.json';
 import { ConfigCulture } from '../models/configCulture';
+import configData from '../../app.config.json';
 
 export class ConfigHelper {
     public getLocales(): string[] {
