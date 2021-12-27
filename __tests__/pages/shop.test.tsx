@@ -1,54 +1,62 @@
-import * as sinon from 'sinon';
-// import { render, screen } from '@testing-library/react'
-// import Shop from '../../src/pages/shop'
-// import { StoreService } from '../../src/services/storeService';
-// import { GetStaticProps, InferGetStaticPropsType } from 'next';
-// import { HomePageInfo } from '../../src/models/homePageInfo';
-// import { ProductCardModel } from '../../src/models/productCardModel';
-// import { Currency } from '../../src/models/currency';
+import { render, screen } from '@testing-library/react'
+import Shop from '../../src/pages/shop'
+import { StoreService } from '../../src/services/storeService';
+import { ProductCardModel } from '../../src/models/productCardModel';
+import { Currency } from '../../src/models/currency';
+import { DynamicPageContet } from '../../src/models/DynamicPageContet';
 
-// describe('Shop page tests', () => {
-//     let getHomeText: sinon.SinonStub;
+describe('Shop page tests', () => {
+    let useRouter: jest.SpyInstance;
+    let getDynamicPageContent: jest.SpyInstance;
 
-//     beforeEach(() => {
-//         getHomeText = sinon.stub(StoreService.prototype, 'getHomeText');
-//     });
+    beforeEach(() => {
+        useRouter = jest.spyOn(require('next/router'), 'useRouter').mockReturnValue({ locale: 'en-US' });
+        getDynamicPageContent = jest.spyOn(StoreService.prototype, 'getDynamicPageContent');
 
-//     afterEach(() => {
-//         getHomeText.restore();
-//     });
+        const meta: DynamicPageContet = {
+            description: 'description'
+        };
 
-//     it('renders a greeting', () => {
-//         const metaTags = {
-//             title: 'title',
-//             description: ''
-//         }
+        getDynamicPageContent.mockReturnValue(meta);
+    });
 
-//         const products: ProductCardModel[] = [
-//             {
-//                 id: 1,
-//                 name: 'Lol1',
-//                 image: '',
-//                 isInStock: true,
-//                 price: {
-//                     amount: 1500,
-//                     currency: Currency.USD
-//                 }
-//             },
-//             {
-//                 id: 2,
-//                 name: 'LolLol2',
-//                 image: '',
-//                 isInStock: false,
-//                 price: {
-//                     amount: 4200,
-//                     currency: Currency.USD
-//                 }
-//             }
-//         ];
-//         render(<Shop metaTags={metaTags} products={products} />)
+    afterEach(() => {
+        useRouter.mockRestore();
+        getDynamicPageContent.mockRestore();
+    });
 
-//         expect(screen.queryByText('Lol1')).toBeInTheDocument();
-//         expect(screen.queryByText('LolLol2')).toBeInTheDocument();
-//     })
-// })
+    it('renders a greeting', () => {
+        const metaTags = {
+            title: 'title'
+        }
+
+        const products: ProductCardModel[] = [
+            {
+                id: 1,
+                name: 'Lol1',
+                image: '/image',
+                isInStock: true,
+                price: [{
+                    locale: 'en-US',
+                    amount: 400,
+                    currency: Currency.USD
+                }]
+            },
+            {
+                id: 2,
+                name: 'LolLol2',
+                image: '/image',
+                isInStock: false,
+                price: [{
+                    locale: 'en-US',
+                    amount: 600,
+                    currency: Currency.USD
+                }]
+            }
+        ];
+        render(<Shop metaTags={metaTags} products={products} />)
+
+        expect(screen.queryByText('Lol1')).toBeInTheDocument();
+        expect(screen.queryByText('LolLol2')).toBeInTheDocument();
+    })
+})

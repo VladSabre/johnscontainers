@@ -18,7 +18,7 @@ const Redirect = (data: InferGetStaticPropsType<typeof getStaticProps>) => {
     return null;
 }
 
-export const getStaticProps: GetStaticProps<RedirectSource> = async (context) => {
+export const getStaticProps: GetStaticProps<RedirectSource> = async (_context) => {
     return {
         props: { path: 'product' }
     }

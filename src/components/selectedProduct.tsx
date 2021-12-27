@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button, Card, Row, Col } from "react-bootstrap";
 import { useAppContext } from "../context/appContext";
 import { ProductInCart } from "../models/productInCart";

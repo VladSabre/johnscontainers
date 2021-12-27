@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import ProductCard from '../../src/components/productCard';
-import SelectedProduct from '../../src/components/selectedProduct';
 import * as Context from '../../src/context/appContext';
 import { AppStore } from '../../src/context/appStore';
 import { Currency } from '../../src/models/currency';

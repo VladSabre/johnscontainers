@@ -6,8 +6,11 @@ import ProductCard from '../components/productCard'
 import { StoreService } from '../services/storeService'
 import { ProductResponse } from '../models/productResponse'
 import styles from '../../styles/Product.module.scss';
+import { ConfigHelper } from '../services/configHelper'
+import { useRouter } from 'next/router'
+import { Page } from '../models/page'
 
-export const getServerSideProps: GetServerSideProps<ProductResponse> = async (context) => {
+export const getServerSideProps: GetServerSideProps<ProductResponse> = async (_context) => {
     const service = new StoreService();
 
     return {
@@ -16,11 +19,15 @@ export const getServerSideProps: GetServerSideProps<ProductResponse> = async (co
 }
 
 const Shop = (data: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const service = new StoreService();
+    const configHelper = new ConfigHelper();
+    const locale = useRouter().locale || configHelper.getDefaultLocale();
+    const meta = service.getDynamicPageContent(Page.Home, locale);
     return (
         <>
             <Head>
                 <title>{data.metaTags.title}</title>
-                <meta name='description' content={data.metaTags.description}></meta>
+                <meta name='description' content={meta.description}></meta>
             </Head>
             <div className={styles['product-container']}>
                 {data.products.map((product: ProductCardModel) =>

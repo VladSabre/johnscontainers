@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRouter } from "next/router";
 import { Currency } from "../models/currency";
 import { Price } from "../models/price";

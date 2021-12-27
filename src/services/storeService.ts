@@ -1,5 +1,7 @@
 import { Currency } from '../models/currency';
+import { DynamicPageContet } from '../models/DynamicPageContet';
 import { HomePageInfo } from '../models/homePageInfo';
+import { Page } from '../models/page';
 import { ProductResponse } from '../models/productResponse';
 import { RegionalSettings } from '../models/regionalSettings';
 
@@ -25,7 +27,6 @@ export class StoreService {
         return {
             metaTags: {
                 title: 'Integer bibendum',
-                description: 'Phasellus porta, ante sit amet accumsan tristique'
             },
             products: [
                 {
@@ -87,6 +88,44 @@ export class StoreService {
         else if (region === 'de')
             return {
                 paymentMethods: ['Card', 'PayPal']
+            };
+        else
+            throw Error('Unexpected region');
+    }
+
+    public getDynamicPageContent(page: Page, region: string): DynamicPageContet {
+        if (page === Page.Home)
+            return this.getHomePageContent(region);
+        else if (page === Page.Shop)
+            return this.getShopPageContent(region);
+        else
+            throw Error('Unexpected page');
+    }
+
+    private getHomePageContent(region: string): DynamicPageContet {
+        if (region === 'en-US')
+            return {
+                title: 'Hello',
+                description: 'Lorem ipsum dolor'
+            };
+        else if (region === 'de-DE')
+            return {
+                title: 'Hallo',
+                description: 'Deutshe sprache schwerig sprache'
+            };
+        else
+            throw Error('Unexpected region');
+    }
+
+    private getShopPageContent(region: string): DynamicPageContet {
+        if (region === 'en-US')
+            return {
+                description: 'Phasellus porta, ante sit amet'
+            };
+        else if (region === 'de-DE')
+            return {
+                description: 'Phasellus porta, ante sit amet accumsan tristique'
+
             };
         else
             throw Error('Unexpected region');
