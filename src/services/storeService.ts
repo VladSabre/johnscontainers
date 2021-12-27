@@ -64,6 +64,42 @@ export class StoreService {
                             currency: Currency.EUR
                         }
                     ]
+                },
+                {
+                    id: 3,
+                    name: 'New container',
+                    image: '/noImage.jpg',
+                    isInStock: true,
+                    price: [
+                        {
+                            locale: 'en-US',
+                            amount: 4200,
+                            currency: Currency.USD
+                        },
+                        {
+                            locale: 'de-DE',
+                            amount: 3500,
+                            currency: Currency.EUR
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: 'Even better container',
+                    image: '/noImage.jpg',
+                    isInStock: true,
+                    price: [
+                        {
+                            locale: 'en-US',
+                            amount: 6200,
+                            currency: Currency.USD
+                        },
+                        {
+                            locale: 'de-DE',
+                            amount: 5000,
+                            currency: Currency.EUR
+                        }
+                    ]
                 }
             ]
         };
